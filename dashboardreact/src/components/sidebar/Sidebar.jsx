@@ -2,7 +2,8 @@ import "./sidebar.css";
 import {
   LineStyle,
   PermIdentity,
-  Storefront
+  Storefront,
+  DynamicFeed
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -31,14 +32,14 @@ export default function Sidebar() {
 
             <Link to="/category" className="link">
               <li className="sidebarListItem">
-                <PermIdentity className="sidebarIcon" />
+                <DynamicFeed className="sidebarIcon" />
                   Categorias
                 </li>
             </Link >
 
             <Link to="/users" className="link">
               <li className="sidebarListItem">
-                <PermIdentity className="sidebarIcon" />
+              <PermIdentity className="sidebarIcon" />
                   Usuarios
                 </li>
             </Link >
