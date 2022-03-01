@@ -1,9 +1,10 @@
 .productList{
-    flex: 4;
+  flex:4;
 }
 
 .productListItem{
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 

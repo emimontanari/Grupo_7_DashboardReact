@@ -1,71 +1,87 @@
+import React, { useState, useEffect } from 'react';
+import { DataGrid, GridColDef, GridApi, GridCellValue } from '@mui/x-data-grid';
 import "./users.css";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 
-export default function UserList() {
-  const [data, setData] = useState(userRows);
-
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+const columns: GridColDef[] = [
   
-  const columns = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "user",
-      headerName: "User",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
-            {params.row.username}
-          </div>
-        );
-      },
-    },
-    { field: "email", headerName: "Email", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
-    {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/user/" + params.row.id}>
-              <button className="userListEdit">Edit</button>
-            </Link>
-            <DeleteOutline
-              className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </>
-        );
-      },
-    },
-  ];
+  { field: 'id', headerName: 'ID', width: 90 },
+  {
+    field: 'firstname',
+    headerName: 'Nombre',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'lastname',
+    headerName: 'Apellido',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+    width: 150,
+    editable: true,
+  },
+  
+  {
+    field: 'images',
+    headerName: 'Foto',
+    width: 100,
+    editable: true,
+  },
+  {
+    field: 'profile_id',
+    headerName: 'Profile id',
+    width: 100,
+    editable: true,
+  },
+  {
+    field: 'action',
+    headerName: 'Action',
+    sortable: false,
+    renderCell: (params) => {
+      const onClick = (e) => {
+        e.stopPropagation(); // don't select this row after clicking
 
+        const api: GridApi = params.api;
+        const thisRow: Record<string, GridCellValue> = {};
+
+        api
+          .getAllColumns()
+          .filter((c) => c.field !== '__check__' && !!c)
+          .forEach(
+            (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
+          );
+         
+         return window.location.href = "users/" + thisRow.id;
+      };
+
+      return(
+      <a className="userListEdit" onClick={onClick}>Abrir</a>
+      
+      ) 
+    },
+  }
+];
+export default function DataGridDemo() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+   fetch('http://localhost:3000/api/users')
+   .then(response => response.json())
+   .then(data => setData(data));
+  }, []);
+  
   return (
-    <div className="userList">
+    <div style={{ height: 400, width: '90%',margin:20}}>
       <DataGrid
-        rows={data}
-        disableSelectionOnClick
+        rows={data.data}
         columns={columns}
-        pageSize={8}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
         checkboxSelection
+        disableSelectionOnClick
       />
     </div>
   );

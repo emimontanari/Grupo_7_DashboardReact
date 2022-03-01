@@ -1,71 +1,87 @@
+import React, { useState, useEffect } from 'react';
+import { DataGrid, GridColDef, GridApi, GridCellValue } from '@mui/x-data-grid';
 import "./products.css";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { productRows } from "../../dummyData";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 
-export default function ProductList() {
-  const [data, setData] = useState(productRows);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+const columns: GridColDef[] = [
+  
+  { field: 'id', headerName: 'ID', width: 100 },
+  {
+    field: 'name',
+    headerName: 'Nombre',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'price',
+    headerName: 'Precio',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'description',
+    headerName: 'Description',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'category_id',
+    headerName: 'Category ID',
+    width: 150,
+    editable: true,
+  },
+  
+  {
+    field: 'picture',
+    headerName: 'Foto',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'action',
+    headerName: 'Action',
+    sortable: false,
+    renderCell: (params) => {
+      const onClick = (e) => {
+        e.stopPropagation(); // don't select this row after clicking
 
-  const columns = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "product",
-      headerName: "Product",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.name}
-          </div>
-        );
-      },
-    },
-    { field: "stock", headerName: "Stock", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      width: 160,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/product/" + params.row.id}>
-              <button className="productListEdit">Edit</button>
-            </Link>
-            <DeleteOutline
-              className="productListDelete"
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </>
-        );
-      },
-    },
-  ];
+        const api: GridApi = params.api;
+        const thisRow: Record<string, GridCellValue> = {};
 
+        api
+          .getAllColumns()
+          .filter((c) => c.field !== '__check__' && !!c)
+          .forEach(
+            (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
+          );
+         
+         return window.location.href = "products/" + thisRow.id;
+      };
+
+      return(
+      <a className="userListEdit" onClick={onClick}>Abrir</a>
+      
+      ) 
+    },
+  }
+];
+export default function DataGridDemo() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+   fetch('http://localhost:3000/api/products')
+   .then(response => response.json())
+   .then(data => setData(data));
+  }, []);
   return (
-    <div className="productList">
+    <div style={{ height: 650, width: '90%',margin:20}}>
       <DataGrid
-        rows={data}
-        disableSelectionOnClick
+        rows={data.data}
         columns={columns}
-        pageSize={8}
+        pageSize={10}
+        rowsPerPageOptions={[5]}
         checkboxSelection
+        disableSelectionOnClick
       />
     </div>
   );

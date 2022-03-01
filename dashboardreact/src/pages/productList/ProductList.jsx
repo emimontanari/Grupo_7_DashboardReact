@@ -20,7 +20,7 @@ export default function ProductList() {
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
+          <div className="productList">
             <img className="productListImg" src={params.row.img} alt="" />
             {params.row.name}
           </div>

@@ -1,30 +1,43 @@
 import "./Tabsinfo.css";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
+import React, { useState, useEffect } from 'react';
 
 export default function Tabsinfo() {
+const [data, setData] = useState([]);
+
+  useEffect(() => {
+   fetch('http://localhost:3000/api/users')
+   .then(response => response.json())
+   .then(data => setData(data));
+  }, []);
+  
   return (
     <>
     <div className="tabs">
       <div className="tabsItem">
-        <span className="tabsTitle">Revanue</span>
+        <span className="tabsTitle">Total Productos</span>
         <div className="tabsMoneyContainer">
-          <span className="tabsMoney">$2,415</span>
+            <span className="tabsMoney">
+            
+            </span>
+            
           <span className="tabsMoneyRate">
-            -11.4 <ArrowDownward  className="tabsIcon negative"/>
+            -11.4 <ArrowDownward  className="tabsIcon positive"/>
           </span>
         </div>
-        <span className="tabsSub">Compared to last month</span>
+
       </div>
+
       <div className="tabsItem">
-        <span className="tabsTitle">Sales</span>
+        <span className="tabsTitle">Total de Usuarios</span>
         <div className="tabsMoneyContainer">
           <span className="tabsMoney">$4,415</span>
           <span className="tabsMoneyRate">
             -1.4 <ArrowDownward className="tabsIcon negative"/>
           </span>
         </div>
-        <span className="tabsSub">Compared to last month</span>
       </div>
+
       <div className="tabsItem">
         <span className="tabsTitle">Cost</span>
         <div className="tabsMoneyContainer">
@@ -33,7 +46,6 @@ export default function Tabsinfo() {
             +2.4 <ArrowUpward className="tabsIcon"/>
           </span>
         </div>
-        <span className="tabsSub">Compared to last month</span>
       </div>
     </div>
     
