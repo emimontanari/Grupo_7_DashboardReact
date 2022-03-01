@@ -22,6 +22,11 @@
   cursor: pointer;
 }
 
+.topLeft img{
+  width: 80%;
+  margin-top: 10px;
+}
+
 .topRight{
     display: flex;
     align-items: center;
