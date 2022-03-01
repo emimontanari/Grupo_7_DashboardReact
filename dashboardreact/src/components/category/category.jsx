@@ -1,41 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid, GridColDef, GridApi, GridCellValue } from '@mui/x-data-grid';
-import "./products.css";
-
+import "./category.css";
 
 const columns: GridColDef[] = [
   
-  { field: 'id', headerName: 'ID', width: 100 },
+  { field: 'id', headerName: 'ID', width: 90 },
   {
     field: 'name',
-    headerName: 'Nombre',
+    headerName: 'Categoria',
     width: 150,
     editable: true,
   },
   {
-    field: 'price',
-    headerName: 'Precio',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'description',
-    headerName: 'Description',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'category_id',
-    headerName: 'Category ID',
-    width: 150,
-    editable: true,
-  },
-  
-  {
-    field: 'picture',
-    headerName: 'Foto',
-    width: 150,
-    editable: true,
+    field: 'total',
+    headerName: 'Total',
+    type: 'number',
+    width: 90,
   },
   {
     field: 'action',
@@ -55,7 +35,7 @@ const columns: GridColDef[] = [
             (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
           );
          
-         return window.location.href = "products/" + thisRow.id;
+         return window.location.href = "category/" + thisRow.id;
       };
 
       return(
@@ -69,17 +49,17 @@ export default function DataGridDemo() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-   fetch('http://localhost:3000/api/products')
+   fetch('http://localhost:3000/api/category')
    .then(response => response.json())
    .then(data => setData(data));
   }, []);
   
   return (
-    <div style={{ height: 650, width: '80%',margin:20}}>
+    <div style={{ height: 350, width: '50%',margin:20}}>
       <DataGrid
         rows={data.data}
         columns={columns}
-        pageSize={10}
+        pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection
         disableSelectionOnClick

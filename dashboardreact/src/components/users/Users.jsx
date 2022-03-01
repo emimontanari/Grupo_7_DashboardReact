@@ -74,7 +74,7 @@ export default function DataGridDemo() {
   }, []);
   
   return (
-    <div style={{ height: 400, width: '90%',margin:20}}>
+    <div style={{ height: 400, width: '80%',margin:20}}>
       <DataGrid
         rows={data.data}
         columns={columns}
