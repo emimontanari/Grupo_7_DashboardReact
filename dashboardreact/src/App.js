@@ -3,13 +3,8 @@ import Topbar from "./components/topbar/Topbar";
 import "./App.css";
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router,Switch, Route } from "react-router-dom";
-import userDetail from "./components/userDetail/userDetail";
-//import UserList from "./pages/userList/UserList";
-// import User from "./pages/user/User";
-// import NewUser from "./pages/newUser/NewUser";
-// import ProductList from "./pages/productList/ProductList";
-// import Product from "./pages/product/Product";
-// import NewProduct from "./pages/newProduct/NewProduct";
+import UserDetails from "./components/UserDetails/UserDetails";
+
 
 function App() {
   return (
@@ -22,7 +17,7 @@ function App() {
             <Home />
           </Route>
           <Route  path="/users/:id">
-            <userDetail />
+            <UserDetails />
           </Route>
         </Switch>
       </div>
