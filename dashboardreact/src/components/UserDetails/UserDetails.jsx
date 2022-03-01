@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import {
   LocationSearching,
   MailOutline,
   PermIdentity
 } from "@material-ui/icons";
-import "./userDetail.css";
+import "./userDetails.css";
 
 
 export default function UserDetails() {
+  let params = useParams()
   const [data, setData] = useState([]);
 
   useEffect(() => {
-   fetch('http://localhost:3000/api/users')
-   .then(response => response.json())
-   .then(data => setData(data));
-  }, []);
-  
+   fetch('http://localhost:3000/api/users/'+params.id)
+  .then(response => response.json())
+  .then(data => setData(data))
+  },[]);
+ let row = data.data;
+
+ if (row){
   return (
     
     <div className="home">
@@ -26,8 +30,8 @@ export default function UserDetails() {
 
           <div className="userShowTop">
             <img
-              src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
+              src={row.images + '?auto=compress&cs=tinysrgb&dpr=2&w=500'}
+              alt={row.firstname + ' ' + row.lastname}
               className="userShowImg"
             />
           </div>
@@ -35,29 +39,29 @@ export default function UserDetails() {
         <div className="userUpdate">
           <div className="userShowBottom">
             <span className="userShowTitle">Detalle Usuario</span><br/>
-            <span className="userShowTitle">Usuario ID: </span>
+            <span className="userShowTitle">Usuario ID: {row.id}</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
               <span className="userShowInfoTitle">Nombre: </span>
-              <span className="userShowInfoTitle">annabeck99</span>
+              <span className="userShowInfoTitle">{row.firstname}</span>
             </div>
 
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
               <span className="userShowInfoTitle">Apellido: </span>
-              <span className="userShowInfoTitle">annabeck99</span>
+              <span className="userShowInfoTitle">{row.lastname}</span>
             </div>
 
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
               <span className="userShowInfoTitle">Email: </span>
-              <span className="userShowInfoTitle">annabeck99@gmail.com</span>
+              <span className="userShowInfoTitle">{row.email}</span>
             </div>
 
             <div className="userShowInfo">
               <LocationSearching className="userShowIcon" />
               <span className="userShowInfoTitle">Profile ID:</span>
-              <span className="userShowInfoTitle">1</span>
+              <span className="userShowInfoTitle">{row.profile_id}</span>
             </div>
 
             
@@ -69,5 +73,12 @@ export default function UserDetails() {
       
     </div>
     </div>
-  );
+  )
+ } else {
+  return (<></>);
+}
+  
+  
+
+  
 }

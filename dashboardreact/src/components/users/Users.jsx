@@ -25,12 +25,6 @@ const columns: GridColDef[] = [
   },
   
   {
-    field: 'images',
-    headerName: 'Foto',
-    width: 100,
-    editable: true,
-  },
-  {
     field: 'profile_id',
     headerName: 'Profile id',
     width: 100,

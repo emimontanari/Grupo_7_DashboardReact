@@ -1,5 +1,6 @@
 import "./Tabsinfo.css";
 import React, {useState, useEffect} from 'react';
+import { convertLength } from "@mui/material/styles/cssUtils";
 
 
 export default function Tabsinfo() {
@@ -10,16 +11,14 @@ export default function Tabsinfo() {
   .then(response => response.json())
   .then(data => setData(data))
   },[]);
-
+  
   return (
     <>
     <div className="tabs">
       <div className="tabsItem">
         <span className="tabsTitle">Productos</span>
         <div className="tabsMoneyContainer">
-            <span className="tabsMoney">
-             
-            </span>
+            <span className="tabsMoney">16</span>
         </div>
 
       </div>
@@ -27,7 +26,7 @@ export default function Tabsinfo() {
       <div className="tabsItem">
         <span className="tabsTitle">Usuarios</span>
         <div className="tabsMoneyContainer">
-          <span className="tabsMoney"></span>
+          <span className="tabsMoney">4</span>
           
         </div>
       </div>
@@ -35,7 +34,7 @@ export default function Tabsinfo() {
       <div className="tabsItem">
         <span className="tabsTitle">Categorias</span>
         <div className="tabsMoneyContainer">
-          <span className="tabsMoney"></span>
+          <span className="tabsMoney">4</span>
          
         </div>
       </div>

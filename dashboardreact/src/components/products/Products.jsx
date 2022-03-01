@@ -30,13 +30,7 @@ const columns: GridColDef[] = [
     width: 150,
     editable: true,
   },
-  
-  {
-    field: 'picture',
-    headerName: 'Foto',
-    width: 150,
-    editable: true,
-  },
+
   {
     field: 'action',
     headerName: 'Action',
