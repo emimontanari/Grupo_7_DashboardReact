@@ -29,22 +29,20 @@ export default function Sidebar() {
               </li>
             </Link>
 
-            <Link to="/users" className="link">
-              <li className="sidebarListItem">
-                <PermIdentity className="sidebarIcon" />
-                  Usuarios
-                </li>
-            </Link >
-
             <Link to="/category" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
                   Categorias
                 </li>
             </Link >
-              
 
-            
+            <Link to="/users" className="link">
+              <li className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                  Usuarios
+                </li>
+            </Link >
+          
           </ul>
         </div>
       </div>

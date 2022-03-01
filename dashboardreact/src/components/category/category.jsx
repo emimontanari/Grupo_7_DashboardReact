@@ -12,12 +12,6 @@ const columns: GridColDef[] = [
     editable: true,
   },
   {
-    field: 'total',
-    headerName: 'Total',
-    type: 'number',
-    width: 90,
-  },
-  {
     field: 'action',
     headerName: 'Action',
     sortable: false,
@@ -55,7 +49,7 @@ export default function DataGridDemo() {
   }, []);
   
   return (
-    <div style={{ height: 350, width: '50%',margin:20}}>
+    <div style={{ height: 400, width: '97%',margin:20}}>
       <DataGrid
         rows={data.data}
         columns={columns}

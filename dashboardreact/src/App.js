@@ -8,7 +8,7 @@ import Users from "./components/users/Users";
 import UserDetails from "./components/UserDetails/UserDetails";
 import Products from "./components/products/Products";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-import Category from "./components/category/category";
+import Category from "./components/Category/Category";
 import CategoryDetail from "./components/categoryDetail/CategoryDetail";
 import { CategoryOutlined } from "@material-ui/icons";
 
@@ -39,7 +39,7 @@ function App() {
             <Category />
           </Route>
           <Route  path="/category/:id">
-            <ProductDetails />
+            <CategoryDetail />
           </Route>
         </Switch>
       </div>

@@ -1,6 +1,5 @@
-import "./Tabsinfo.css";
+import "./tabsinfo.css";
 import React, {useState, useEffect} from 'react';
-import { convertLength } from "@mui/material/styles/cssUtils";
 
 
 export default function Tabsinfo() {

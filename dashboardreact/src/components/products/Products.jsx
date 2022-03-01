@@ -13,24 +13,25 @@ const columns: GridColDef[] = [
     editable: true,
   },
   {
-    field: 'price',
-    headerName: 'Precio',
-    width: 150,
-    editable: true,
-  },
-  {
     field: 'description',
     headerName: 'Description',
     width: 150,
     editable: true,
   },
   {
-    field: 'category_id',
-    headerName: 'Category ID',
+    field: 'price',
+    headerName: 'Precio',
+    align: 'right',
     width: 150,
     editable: true,
   },
-
+  {
+    field: 'offer',
+    headerName: 'Descuento',
+    align: 'right',
+    width: 100,
+    editable: true,
+  },
   {
     field: 'action',
     headerName: 'Action',
@@ -69,7 +70,7 @@ export default function DataGridDemo() {
   }, []);
   
   return (
-    <div style={{ height: 650, width: '80%',margin:20}}>
+    <div style={{ height: 400, width: '97%',margin:20}}>
       <DataGrid
         rows={data.data}
         columns={columns}
